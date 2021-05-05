@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_175222) do
+ActiveRecord::Schema.define(version: 2021_05_05_231952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_175222) do
     t.integer "org"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
     t.index ["user_id"], name: "index_newshifts_on_user_id"
   end
 
@@ -36,6 +37,18 @@ ActiveRecord::Schema.define(version: 2021_05_05_175222) do
     t.decimal "hourly_rate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orgshifts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "start", null: false
+    t.datetime "end", null: false
+    t.integer "break_length", null: false
+    t.integer "org", null: false
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orgshifts_on_user_id"
   end
 
   create_table "shifts", force: :cascade do |t|
@@ -60,5 +73,6 @@ ActiveRecord::Schema.define(version: 2021_05_05_175222) do
   end
 
   add_foreign_key "newshifts", "users"
+  add_foreign_key "orgshifts", "users"
   add_foreign_key "shifts", "users"
 end
