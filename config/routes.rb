@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :shifts
-  resources :users, only: [:create, :update]
+  resources :users, only: [:create, :update, :show, :index]
   post "/login", to: "users#login"
   get "/auto_login", to: "users#auto_login"
   resources :organisations

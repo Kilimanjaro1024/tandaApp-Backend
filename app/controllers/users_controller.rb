@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:auto_login, :update]
+  before_action :authorized, only: [:auto_login, :update, :show, :index ]
 
   # GET /users
   def index
@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    @user = User.where(id: @user.id)
     render json: @user
   end
 
