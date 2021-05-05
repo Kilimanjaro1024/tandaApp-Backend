@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :newshifts
   resources :shifts
   resources :users, only: [:create, :update, :show, :index]
   post "/login", to: "users#login"
