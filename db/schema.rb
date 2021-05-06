@@ -10,27 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_231952) do
+ActiveRecord::Schema.define(version: 2021_05_06_005306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "new_property_for_orgs", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "newshifts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "start"
-    t.datetime "end"
-    t.integer "break_length"
-    t.integer "org"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.index ["user_id"], name: "index_newshifts_on_user_id"
-  end
 
   create_table "organisations", force: :cascade do |t|
     t.string "name"
@@ -51,18 +34,6 @@ ActiveRecord::Schema.define(version: 2021_05_05_231952) do
     t.index ["user_id"], name: "index_orgshifts_on_user_id"
   end
 
-  create_table "shifts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "start"
-    t.datetime "end"
-    t.integer "break_length"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "org_id"
-    t.integer "org"
-    t.index ["user_id"], name: "index_shifts_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email_address"
@@ -72,7 +43,5 @@ ActiveRecord::Schema.define(version: 2021_05_05_231952) do
     t.bigint "organisation_id"
   end
 
-  add_foreign_key "newshifts", "users"
   add_foreign_key "orgshifts", "users"
-  add_foreign_key "shifts", "users"
 end
